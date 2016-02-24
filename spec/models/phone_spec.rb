@@ -19,20 +19,22 @@ describe Phone do
     expect(mobile_phone.errors[:phone]).to include('has already been taken')
   end
   it "allows two contacts to share a phone number" do
-    contact = Contact.create(
-      firstname: 'Joe',
-      lastname: 'Test',
-      email: 'tester@example.com'
-    )
-    contact.phones.create(
-      phone_type: 'home',
-      phone: '785-755-1234'
-    )
-    other_contact = Contact.new
-    other_phone = other_contact.phones.build(
-      phone_type: 'home',
-      phone: '785-755-1234'
-    )
-    expect(other_phone).to be_valid
+    # contact = Contact.create(
+    #   firstname: 'Joe',
+    #   lastname: 'Test',
+    #   email: 'tester@example.com'
+    # )
+    # contact.phones.create(
+    #   phone_type: 'home',
+    #   phone: '785-755-1234'
+    # )
+    # other_contact = Contact.new
+    # other_phone = other_contact.phones.build(
+    #   phone_type: 'home',
+    #   phone: '785-755-1234'
+    # )
+    create(:phone, phone_type:'home')
+
+    expect(build(:phone)).to be_valid
   end
 end
