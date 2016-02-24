@@ -32,7 +32,7 @@ describe Contact do
       expect(contact.errors[:email]).to include("can't be blank")
     end
     it 'is invalid with a with a duplicate email' do
-      FactoryGirl.create(:contact, email: 'aaron@example.com')
+      create(:contact, email: 'aaron@example.com')
       contact = build(:contact, email: 'aaron@example.com')
       contact.valid?
       expect(contact.errors[:email]).to include("has already been taken")
