@@ -30,13 +30,14 @@ describe Contact do
     expect(contact.errors[:email]).to include("has already been taken")
   end
   it 'is invalid without an email address' do
-    it 'is invalid without a email' do
       contact = Contact.new(email: nil)
       contact.valid?
       expect(contact.errors[:email]).to include("can't be blank")
-    end
   end
   it "returns a contact's full name as a string" do
-
+    contact = Contact.create(
+      firstname: 'Joe', lastname: 'Tester', email:'tester@example.com'
+    )
+    expect(contact.name).to eq('Joe Tester')
   end
 end
