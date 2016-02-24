@@ -2,19 +2,22 @@ require 'rails_helper'
 
 describe Phone do
   it "does not allow duplicate phone numbers per contact" do
-    contact = Contact.create(
-      firstname: 'Joe',
-      lastname: 'Test',
-      email: 'tester@example.com'
-    )
-    contact.phones.create(
-      phone_type: 'home',
-      phone: '785-555-1234'
-    )
-    mobile_phone = contact.phones.build(
-      phone_type: 'mobile',
-      phone: '785-555-1234'
-    )
+    # contact = Contact.create(
+    #   firstname: 'Joe',
+    #   lastname: 'Test',
+    #   email: 'tester@example.com'
+    # )
+    # contact.phones.create(
+    #   phone_type: 'home',
+    #   phone: '785-555-1234'
+    # )
+    # mobile_phone = contact.phones.build(
+    #   phone_type: 'mobile',
+    #   phone: '785-555-1234'
+    # )
+    contact = create(:contact)
+    create(:home_phone, contact: contact)
+    mobile_phone = build(:mobile_phone, contact: contact)
     mobile_phone.valid?
     expect(mobile_phone.errors[:phone]).to include('has already been taken')
   end
@@ -33,8 +36,7 @@ describe Phone do
     #   phone_type: 'home',
     #   phone: '785-755-1234'
     # )
-    create(:phone, phone_type:'home')
-
+    create(:phone)
     expect(build(:phone)).to be_valid
   end
 end
