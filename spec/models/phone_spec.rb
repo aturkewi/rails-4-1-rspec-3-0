@@ -16,8 +16,8 @@ describe Phone do
     #   phone: '785-555-1234'
     # )
     contact = create(:contact)
-    create(:home_phone, contact: contact)
-    mobile_phone = build(:mobile_phone, contact: contact)
+    create(:home_phone, contact: contact, phone: '123-555-1234')
+    mobile_phone = build(:mobile_phone, contact: contact, phone: '123-555-1234')
     mobile_phone.valid?
     expect(mobile_phone.errors[:phone]).to include('has already been taken')
   end
@@ -36,7 +36,7 @@ describe Phone do
     #   phone_type: 'home',
     #   phone: '785-755-1234'
     # )
-    create(:phone)
-    expect(build(:phone)).to be_valid
+    create(:phone, phone: '123-555-1234')
+    expect(build(:phone, phone: '123-555-1234')).to be_valid
   end
 end

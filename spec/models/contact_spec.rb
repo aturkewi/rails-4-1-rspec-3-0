@@ -41,28 +41,32 @@ describe Contact do
       contact = build(:contact, firstname: 'Jane', lastname: 'Smith')
       expect(contact.name).to eq('Jane Smith')
     end
+    it 'has three phone numbers' do
+      expect(create(:contact).phones.count).to eq 3
+    end
   end
 
   describe '#by_letter' do
     before :each do
-      @smith = Contact.create(
-      firstname: 'John',
-      lastname: 'Smith',
-      email: 'jsmith@example.com'
-      )
-      @jones = Contact.create(
-      firstname: 'Time',
-      lastname: 'Jones',
-      email: 'tjones@example.com'
-      )
-      @johnson = Contact.create(
-      firstname: 'John',
-      lastname: 'Johnson',
-      email: 'jjohnson@example.com'
-      )
+      @smith = create(:contact, firstname:'John', lastname:'Smith')
+      # firstname: 'John',
+      # lastname: 'Smith',
+      # email: 'jsmith@example.com'
+      # )
+      @jones = create(:contact, firstname:'Tim', lastname:'Jones')
+      # firstname: 'Time',
+      # lastname: 'Jones',
+      # email: 'tjones@example.com'
+      # )
+      @johnson = create(:contact, firstname:'John', lastname:'Johnson')
+      # firstname: 'John',
+      # lastname: 'Johnson',
+      # email: 'jjohnson@example.com'
+      # )
     end
     context 'matching letters' do
       it "returns a sorted array of results that match" do
+        # binding.pry
         expect(Contact.by_letter("J")).to eq([@johnson, @jones])
       end
     end
